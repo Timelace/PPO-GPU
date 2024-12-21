@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Network">
+      <UniqueIdentifier>{4ef4f6cd-6adb-443d-b899-764cd82dd9bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debugger">
+      <UniqueIdentifier>{a8686d01-13ed-4de4-acfb-727f1ea46970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ReinforcementLearning">
+      <UniqueIdentifier>{e777e32f-8224-4040-8477-2d27a2b773f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphing">
+      <UniqueIdentifier>{72a4c4d7-a190-4d10-b640-a2259245d1e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BasicFullyConnected">
+      <UniqueIdentifier>{3f0dfe51-bf76-4175-8046-2b7c6fb30154}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Snake">
+      <UniqueIdentifier>{3da5c7d1-efd5-4a25-99d9-4c623c02dbbb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="Network.cu">
+      <Filter>Network</Filter>
+    </CudaCompile>
+    <CudaCompile Include="DebuggerDeviceHelper.cu">
+      <Filter>Debugger</Filter>
+    </CudaCompile>
+    <CudaCompile Include="GraphingNetwork.cu">
+      <Filter>Graphing</Filter>
+    </CudaCompile>
+    <CudaCompile Include="main.cu" />
+    <CudaCompile Include="BasicFullyConnectedTester.cu">
+      <Filter>BasicFullyConnected</Filter>
+    </CudaCompile>
+    <CudaCompile Include="LossFunction.cu">
+      <Filter>Network</Filter>
+    </CudaCompile>
+    <CudaCompile Include="Reinforce.cu" />
+    <CudaCompile Include="Environment.cu">
+      <Filter>ReinforcementLearning</Filter>
+    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Network.cuh">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Debugger.h">
+      <Filter>Debugger</Filter>
+    </ClInclude>
+    <ClInclude Include="DebuggerDeviceHelper.cuh">
+      <Filter>Debugger</Filter>
+    </ClInclude>
+    <ClInclude Include="LossFunction.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="TrajectorySequence.h">
+      <Filter>ReinforcementLearning</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionGraphics.h">
+      <Filter>Graphing</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphingNetwork.h">
+      <Filter>Graphing</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicFullyConnectedTester.h">
+      <Filter>BasicFullyConnected</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakeGame.h">
+      <Filter>Snake</Filter>
+    </ClInclude>
+    <ClInclude Include="Reinforce.h">
+      <Filter>ReinforcementLearning</Filter>
+    </ClInclude>
+    <ClInclude Include="Environment.h">
+      <Filter>ReinforcementLearning</Filter>
+    </ClInclude>
+    <ClInclude Include="Reinforce.cuh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Debugger.cpp">
+      <Filter>Debugger</Filter>
+    </ClCompile>
+    <ClCompile Include="TrajectorySequence.cpp">
+      <Filter>ReinforcementLearning</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionGraphics.cpp">
+      <Filter>Graphing</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakeGame.cpp">
+      <Filter>Snake</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

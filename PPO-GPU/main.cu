@@ -9,6 +9,7 @@
 #include <random>
 #include <ctime>
 #include "SnakeGame.h"
+#include "CarGame.h"
 
 
 float equation(float input) {
@@ -23,20 +24,20 @@ float equation(float input) {
 
 
 int main() {
-	int network_size = 4;
-	int layer_sizes[] = {1,24,24,1};
-	int batch_size = 1023;
-	int epochs_per_frame = 500;
-	int frames = 1000;
-	int points = 150;
-	float eta = -0.001;
-	float leaky_relu = 0.01;
+	CarGame game(900, 900, 10, 10);
 
-	SnakeGame snake(500, 500, 50, 50, 0.05);
+	//int network_size = 4;
+	//int layer_sizes[] = {1,24,24,1};
+	//int batch_size = 1023;
+	//int epochs_per_frame = 1000;
+	//int frames = 50;
+	//int points = 150;
+	//float eta = -0.001;
+	//float leaky_relu = 0.01;
+
+	//SnakeGame snake(500, 500, 50, 50, 0.05);
 
 	//FunctionGraphics graph(500, 500, -1, 1, -1, 1, 150, equation);
-
-	std::cin.get();
 
 	//BasicFullyConnectedTester network_tester;
 	//network_tester.create_from_scratch(network_size, layer_sizes, batch_size, eta, leaky_relu, epochs_per_frame);
@@ -68,6 +69,8 @@ int main() {
 		net.network_interface(inputs, outputs);
 		printf("%f\t%f\n", *outputs, equation(*inputs));
 	}*/
+	std::cin.get();
+
 
 	return 0;
 }

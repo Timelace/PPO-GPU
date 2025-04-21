@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CarGame.cu" />
     <ClCompile Include="Debugger.cpp" />
     <ClCompile Include="FunctionGraphics.cpp" />
     <CudaCompile Include="BasicFullyConnectedTester.cu" />
@@ -25,6 +26,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicFullyConnectedTester.h" />
+    <ClInclude Include="CarGame.h" />
+    <ClInclude Include="CartPole.h" />
     <ClInclude Include="Debugger.h" />
     <ClInclude Include="DebuggerDeviceHelper.cuh" />
     <ClInclude Include="Environment.h" />

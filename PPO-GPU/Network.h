@@ -1,5 +1,8 @@
 #pragma once
 
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+
 #include "Debugger.h"
 #include "LossFunction.h"
 
@@ -11,6 +14,7 @@ public:
 
 	void train(int epochs, float* inputs, LossFunction** loss);
 	void network_interface(float* inputs, float* outputs);
+	__device__ void network_interface_device(float* inputs, float* outputs);
 
 	void set_weights(float* h_weights);
 	void set_biases(float* h_biases);

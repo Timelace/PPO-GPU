@@ -16,6 +16,7 @@ __device__ __constant__ float d_leaky_relu;
 __device__ __constant__ float d_eta;
 __device__ __constant__ float epsilon = 0.0001;
 __device__ __constant__ float d_decay;
+__device__ __constant__ int d_largest_cumulative_layer_sizes;
 
 // network parameters
 __device__ float* d_neurons;
@@ -53,5 +54,6 @@ __device__ float relu(float val);
 __device__ float relu_derivative(float val);
 
 __global__ void feedforward_interface(int neuron_offset, int p_neuron_offset, int weight_offset, int layer_size, int p_layer_size);
+__global__ void feedforward_interface_2(float* neurons, float* p_neurons, int neuron_offset, int weight_offset, int layer_size, int p_layer_size);
 
 __global__ void init_he(float* float_arr, unsigned long long seed, int layer_size, int array_offset);

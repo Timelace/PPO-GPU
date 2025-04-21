@@ -46,9 +46,14 @@ Network::Network(const int network_size, int* layer_sizes, const int batch_size,
 
 
 	//allocate network parameters (idk make sure page stuff and all that is good)
+	int h_largest_cumulative_layer_sum = 0;
 	for (int i = 1; i < network_size; i++) {
 		h_neuron_count += layer_sizes[i];
 		h_weight_count += layer_sizes[i] * layer_sizes[i - 1];
+		if (i > 1 && i != network_size - 1) {
+			if (layer_sizes[i] + layer_sizes[i - 1] > h_largest_cumulative_layer_sum)
+				h_largest_cumulative_layer_sum = layer_sizes[i] + layer_sizes[i - 1];
+		}
 	}
 
 	cudaMalloc((void**)&d_neurons_host, (h_neuron_count + layer_sizes[0]) * sizeof(float));
@@ -149,7 +154,6 @@ Network::~Network() {
 }
 
 void Network::network_interface(float* inputs, float* outputs) {
-	int blocks = 0, threads = 0;
 	// for now just assume no layer can have more then 1024 neurons cuz im lazy ~~
 	cudaMemcpy(d_neurons_host, inputs, h_layer_sizes[0] * sizeof(float), cudaMemcpyHostToDevice);
 	int neuron_offset = 0, p_neuron_offset = 0, weight_offset = 0;
@@ -193,6 +197,37 @@ __global__ void feedforward_interface(int neuron_offset, int p_neuron_offset, in
 
 	*neuron_ptr = neuron;
 }
+
+//__device__ void network_interface_device(float* inputs, float* outputs) {
+//	int neuron_offset = 0, weight_offset = 0;
+//
+//	for (int layer = 1; layer < d_network_size; layer++) {
+//		feedforward_interface << <1, h_layer_sizes[layer] >> > (neuron_offset, p_neuron_offset, weight_offset, h_layer_sizes[layer], h_layer_sizes[layer - 1]);
+//		neuron_offset += d_layer_sizes[layer];
+//		p_neuron_offset += d_layer_sizes[layer - 1];
+//		weight_offset += d_layer_sizes[layer] * d_layer_sizes[layer - 1];
+//	}
+//	cudaDeviceSynchronize();
+//}
+
+__global__ void feedforward_interface_2(float* neurons, float* p_neurons, int neuron_offset, int weight_offset, int layer_size, int p_layer_size) {
+	float* neuron_ptr = d_neurons + (blockDim.x * blockIdx.x + threadIdx.x);
+	float* p_neuron_ptr = d_neurons;
+	float* weight_ptr = d_weights + (weight_offset + (blockDim.x * blockIdx.x + threadIdx.x) * p_layer_size);
+	float bias = *(d_biases + (neuron_offset + blockDim.x * blockIdx.x + threadIdx.x));
+
+	float neuron = 0;
+	for (int pn = 0; pn < p_layer_size; pn++) {
+		neuron += *(weight_ptr + pn) * *(p_neuron_ptr + pn);
+	}
+	neuron += bias;
+
+	neuron = relu(neuron);
+
+	*neuron_ptr = neuron;
+}
+
+
 
 __global__ void print_things(float* arr, int items) {
 	for (int i = 0; i < items; i++) 
@@ -309,7 +344,7 @@ void Network::train(int epochs, float* inputs, LossFunction** loss) {
 
 		int epoch_offset = 0;
 	for (int epoch = 1; epoch <= epochs; epoch++) {
-		//if (epoch % 100 == 0) printf("done with %d\n", epoch);
+		if (epoch % 100 == 0) printf("done with %d\n", epoch);
 
 		// feedforward
 		int neuron_offset = 0, p_neuron_offset = 0, weight_offset = 0;

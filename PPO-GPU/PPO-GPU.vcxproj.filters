@@ -19,6 +19,12 @@
     <Filter Include="Snake">
       <UniqueIdentifier>{3da5c7d1-efd5-4a25-99d9-4c623c02dbbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CarGame">
+      <UniqueIdentifier>{2f60d1cb-b79e-479d-9d31-1ec28616c831}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CartPole">
+      <UniqueIdentifier>{d14307bc-d03b-4ea3-b799-fb44a7a2e8eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="Network.cu">
@@ -37,8 +43,10 @@
     <CudaCompile Include="LossFunction.cu">
       <Filter>Network</Filter>
     </CudaCompile>
-    <CudaCompile Include="Reinforce.cu" />
     <CudaCompile Include="Environment.cu">
+      <Filter>ReinforcementLearning</Filter>
+    </CudaCompile>
+    <CudaCompile Include="Reinforce.cu">
       <Filter>ReinforcementLearning</Filter>
     </CudaCompile>
   </ItemGroup>
@@ -79,7 +87,15 @@
     <ClInclude Include="Environment.h">
       <Filter>ReinforcementLearning</Filter>
     </ClInclude>
-    <ClInclude Include="Reinforce.cuh" />
+    <ClInclude Include="Reinforce.cuh">
+      <Filter>ReinforcementLearning</Filter>
+    </ClInclude>
+    <ClInclude Include="CarGame.h">
+      <Filter>CarGame</Filter>
+    </ClInclude>
+    <ClInclude Include="CartPole.h">
+      <Filter>CartPole</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Debugger.cpp">
@@ -93,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="SnakeGame.cpp">
       <Filter>Snake</Filter>
+    </ClCompile>
+    <ClCompile Include="CarGame.cu">
+      <Filter>CarGame</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
